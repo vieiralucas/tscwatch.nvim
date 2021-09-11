@@ -88,7 +88,6 @@ local function toggle()
       end
 
       if buf ~= nil and api.nvim_buf_is_valid(buf) and api.nvim_buf_is_loaded(buf) then
-        api.nvim_set_current_win(win)
         api.nvim_buf_set_lines(buf, 0, -1, false, lines)
       end
     end
