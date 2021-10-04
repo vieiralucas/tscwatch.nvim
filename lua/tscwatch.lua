@@ -141,6 +141,7 @@ local function goto()
     end
   end
 
+  toggle()
   api.nvim_command("tabedit "..fname)
   api.nvim_win_set_cursor(api.nvim_get_current_win(), {row, col})
 end
