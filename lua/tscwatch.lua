@@ -65,7 +65,19 @@ local function toggle()
 
   local stdout = loop.new_pipe(false)
 
-  handle = loop.spawn("npx", {
+  local yarn_lock = io.open("yarn.lock")
+  local use_yarn = false
+  if yarn_lock ~= nil then
+    use_yarn = true
+    io.close(yarn_lock)
+  end
+
+  local command = "npx"
+  if use_yarn then
+    command = "yarn"
+  end
+
+  handle = loop.spawn(command, {
     args = {"tsc", "--watch"},
     stdio = {nil, stdout}
   }, function(code, signal)
@@ -150,3 +162,4 @@ return {
   toggle = toggle,
   goto = goto
 }
+
